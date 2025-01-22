@@ -33,17 +33,18 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth',          # обрабатывает запросы по ссылке /accounts/
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',  # добавляем для работы с плоскими страницами
-    'django.contrib.flatpages',  # добавляем для работы с плоскими страницами
+    'django.contrib.sites',         # добавляем для работы с плоскими страницами
+    'django.contrib.flatpages',     # добавляем для работы с плоскими страницами
 
-    'new_portal',  # созданное приложение
-    'django_filters',  # сторонний пакет для фильтраций
+    'new_portal',                   # созданное приложение
+    'django_filters',               # сторонний пакет для фильтраций
+    'accounts',                     # созданное приложение
 ]
 
 SITE_ID = 1
@@ -134,3 +135,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]  # для подгрузки стилей из папки static
+
+LOGIN_REDIRECT_URL = '/post'  # После входа, нас перебросит на страницу всех постов
