@@ -33,21 +33,28 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',          # обрабатывает запросы по ссылке /accounts/ (поддержка авторизации)
+    'django.contrib.auth',                       # обрабатывает запросы по ссылке /accounts/ (поддержка авторизации)
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',         # добавляем для работы с плоскими страницами
-    'django.contrib.flatpages',     # добавляем для работы с плоскими страницами
+    'django.contrib.sites',                      # добавляем для работы с плоскими страницами
+    'django.contrib.flatpages',                  # добавляем для работы с плоскими страницами
 
-    'new_portal',                   # созданное приложение
-    'django_filters',               # сторонний пакет для фильтраций
-    'accounts',                     # созданное приложение
+    'new_portal',                                # созданное приложение
+    'django_filters',                            # сторонний пакет для фильтраций
+    'accounts',                                  # созданное приложение
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.yandex',  # поддержка входа с помощью Yandex
+    'allauth.socialaccount.providers.google',    # Пример провайдера Google
 ]
 
 SITE_ID = 1
+LOGIN_URL = '/accounts/login/'                    # конкретизирует адрес страницы для аутентификации
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',  # для плоских страниц
+    'allauth.account.middleware.AccountMiddleware',  # Добавил промежуточное программное обеспечение учетной записи:
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -71,7 +79,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',          # для `allauth` обязательно нужен этот процессор
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -137,3 +145,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / "static"]  # для подгрузки стилей из папки static
 
 LOGIN_REDIRECT_URL = '/post'  # После входа, нас перебросит на страницу всех постов
+
+# Настройка бэкендов аутентификации
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # встроенный бэкенд Django реализующий аутентификацию по username;
+    'allauth.account.auth_backends.AuthenticationBackend',  # бэкенд аутентификации, предоставленный пакетом allauth
+]
