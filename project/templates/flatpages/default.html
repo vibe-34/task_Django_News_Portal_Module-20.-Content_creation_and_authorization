@@ -24,12 +24,21 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'signup' %}">Регистрация</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Вход</a></li>
+
+                        <!-- Форма выхода -->
                         <li class="nav-item active">
-                            <a class="nav-link" href="search/">Поиск</a>
+                            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link btn btn-link">Выход</button>
+                            </form>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/post/">Все публикации</a>
-                        </li>
+
+                        <li class="nav-item active"><a class="nav-link" href="search/">Поиск</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/post/">Все публикации</a></li>
+
+
                     </ul>
                 </div>
             </div>
