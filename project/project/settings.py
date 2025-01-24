@@ -142,12 +142,20 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [BASE_DIR / "static"]  # для подгрузки стилей из папки static
+STATICFILES_DIRS = [BASE_DIR / "static"]                   # для подгрузки стилей из папки static
 
-LOGIN_REDIRECT_URL = '/post'  # После входа, нас перебросит на страницу всех постов
+LOGIN_REDIRECT_URL = '/post'                               # После входа, нас перебросит на страницу всех постов
 
 # Настройка бэкендов аутентификации
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # встроенный бэкенд Django реализующий аутентификацию по username;
+    'django.contrib.auth.backends.ModelBackend',      # встроенный бэкенд Django реализующий аутентификацию по username;
     'allauth.account.auth_backends.AuthenticationBackend',  # бэкенд аутентификации, предоставленный пакетом allauth
 ]
+
+# Настройки для django-allauth
+ACCOUNT_EMAIL_REQUIRED = True                               # Электронная почта обязательна для регистрации
+ACCOUNT_UNIQUE_EMAIL = True                                 # Электронная почта должна быть уникальной
+ACCOUNT_USERNAME_REQUIRED = False                           # username, Имя пользователя необязательно
+ACCOUNT_AUTHENTICATION_METHOD = 'email'                     # Аутентификация будет осуществляться по электронной почте
+ACCOUNT_EMAIL_VERIFICATION = 'none'                         # Верификация электронной почты не требуется
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'                  # верификация почты обязательна
