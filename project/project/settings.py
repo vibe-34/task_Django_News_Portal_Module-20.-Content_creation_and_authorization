@@ -154,9 +154,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Настройки для django-allauth
-ACCOUNT_EMAIL_REQUIRED = True                               # Электронная почта обязательна для регистрации
-ACCOUNT_UNIQUE_EMAIL = True                                 # Электронная почта должна быть уникальной
-ACCOUNT_USERNAME_REQUIRED = False                           # username, Имя пользователя необязательно
-ACCOUNT_AUTHENTICATION_METHOD = 'email'                     # Аутентификация будет осуществляться по электронной почте
-ACCOUNT_EMAIL_VERIFICATION = 'none'                         # Верификация электронной почты не требуется
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'                  # верификация почты обязательна
+ACCOUNT_EMAIL_REQUIRED = True                                 # Электронная почта обязательна для регистрации
+ACCOUNT_UNIQUE_EMAIL = True                                   # Электронная почта должна быть уникальной
+ACCOUNT_USERNAME_REQUIRED = False                             # username, Имя пользователя необязательно
+ACCOUNT_AUTHENTICATION_METHOD = 'email'                       # Аутентификация будет осуществляться по электронной почте
+ACCOUNT_EMAIL_VERIFICATION = 'none'                           # Верификация электронной почты не требуется
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'                    # верификация почты обязательна
+ACCOUNT_FORMS = {'signup': 'accounts.forms.BasicSignupForm'}  # форма добавляющая пользователя в группу, при регистрации
