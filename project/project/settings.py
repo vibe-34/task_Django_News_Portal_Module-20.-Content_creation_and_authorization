@@ -145,6 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / "static"]                   # для подгрузки стилей из папки static
 
 LOGIN_REDIRECT_URL = '/post'                               # После входа, нас перебросит на страницу всех постов
+LOGOUT_REDIRECT_URL = '/post'
 
 # Настройка бэкендов аутентификации
 AUTHENTICATION_BACKENDS = [
