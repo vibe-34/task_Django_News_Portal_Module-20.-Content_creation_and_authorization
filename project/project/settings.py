@@ -144,8 +144,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]                   # для подгрузки стилей из папки static
 
-LOGIN_REDIRECT_URL = '/post'                               # После входа, нас перебросит на страницу всех постов
-LOGOUT_REDIRECT_URL = '/post'
+LOGIN_REDIRECT_URL = '/'                                   # После входа, нас перебросит на страницу ЛК (index.html)
+# LOGOUT_REDIRECT_URL = 'post/'                            # после выхода, перекинет по адресу(по default на стр. входа)
 
 # Настройка бэкендов аутентификации
 AUTHENTICATION_BACKENDS = [
@@ -154,10 +154,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Настройки для django-allauth
-ACCOUNT_EMAIL_REQUIRED = True                                 # Электронная почта обязательна для регистрации
-ACCOUNT_UNIQUE_EMAIL = True                                   # Электронная почта должна быть уникальной
-ACCOUNT_USERNAME_REQUIRED = False                             # username, Имя пользователя необязательно
-ACCOUNT_AUTHENTICATION_METHOD = 'email'                       # Аутентификация будет осуществляться по электронной почте
-ACCOUNT_EMAIL_VERIFICATION = 'none'                           # Верификация электронной почты не требуется
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'                    # верификация почты обязательна
-ACCOUNT_FORMS = {'signup': 'accounts.forms.BasicSignupForm'}  # форма добавляющая пользователя в группу, при регистрации
+ACCOUNT_EMAIL_REQUIRED = True                                  # Электронная почта обязательна для регистрации
+ACCOUNT_UNIQUE_EMAIL = True                                    # Электронная почта должна быть уникальной
+ACCOUNT_USERNAME_REQUIRED = False                              # username, Имя пользователя необязательно
+ACCOUNT_AUTHENTICATION_METHOD = 'email'                        # Аутентификация будет выполняться по электронной почте
+ACCOUNT_EMAIL_VERIFICATION = 'none'                            # Верификация электронной почты не требуется
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'                     # верификация почты обязательна
+ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignupForm'}  # форма добавляющая юзера в группу, при регистрации

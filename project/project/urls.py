@@ -22,6 +22,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),                 # Оставил толькоallauth
     # path('accounts/', include('django.contrib.auth.urls')),   # Dgango будет искать путь сначала здесь (в стандартных)
     # path("accounts/", include("accounts.urls")),              # Если путь выше не найден, то поиск продолжится ЗДЕСЬ
+    path('', include('accounts.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('post/', include('new_portal.urls')),
 ]

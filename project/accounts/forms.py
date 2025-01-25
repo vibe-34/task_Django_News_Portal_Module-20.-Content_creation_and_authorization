@@ -24,13 +24,13 @@ class SignUpForm(UserCreationForm):
         )
 
 
-class BasicSignupForm(SignupForm):
+class CustomSignupForm(SignupForm):
     """
-    Добавляет нового пользователя в группу basic, при успешном заполнении
+    Добавляет нового пользователя в группу common, при успешном заполнении
     формы регистрации.
     """
     def save(self, request):
-        user = super(BasicSignupForm, self).save(request)  # вызываем это же метод у родителя
-        basic_group = Group.objects.get(name='common')      # получаем объект модели группы common
-        basic_group.user_set.add(user)                     # возвращаем пользователей группы и добавляем нового
+        user = super(CustomSignupForm, self).save(request)  # вызываем это же метод у родителя
+        common_group = Group.objects.get(name='common')      # получаем объект модели группы common
+        common_group.user_set.add(user)                     # возвращаем пользователей группы и добавляем нового
         return user                                        # возвращаем объект модели User
