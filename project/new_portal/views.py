@@ -1,5 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin  # только для зарегистрированных пользователей
-from django.shortcuts import render
+from django.contrib.auth.mixins import PermissionRequiredMixin  # только для зарегистрированных пользователей
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -39,7 +38,8 @@ class PostDetail(DetailView):
     context_object_name = 'post_id'                            # имя для обращения в шаблоне
 
 
-class PostCreate(LoginRequiredMixin, CreateView):
+class PostCreate(PermissionRequiredMixin, CreateView):
+    permission_required = ('new_portal.add_post',)
     model = Post
     form_class = PostForm                                       # Указываем разработанную форму
     template_name = 'create_post.html'                          # Шаблон, в котором будет использоваться форма
@@ -55,14 +55,16 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostUpdate(LoginRequiredMixin, UpdateView):
+class PostUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = ('new_portal.change_post',)
     model = Post
     form_class = PostForm                        # Указываем разработанную форму (ту же самую, что и при создании поста)
     template_name = 'create_post.html'           # Шаблон, в котором будет использоваться форма
     success_url = reverse_lazy('post')           # URL для перенаправления после успешного создания поста
 
 
-class PostDelete(LoginRequiredMixin, DeleteView):
+class PostDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = ('new_portal.delete_post',)
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post')
