@@ -24,19 +24,23 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="{% url 'account_signup' %}">Регистрация</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{% url 'account_login' %}">Вход</a></li>
-
-                        <!-- Форма выхода -->
-                        <li class="nav-item active">
-                            <form action="{% url 'account_logout' %}" method="post" style="display: inline;">
-                                {% csrf_token %}
-                                <button type="submit" class="nav-link btn btn-link">Выход</button>
-                            </form>
-                        </li>
-
-                        <li class="nav-item active"><a class="nav-link" href="search/">Поиск</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/post/">Все публикации</a></li>
+                        <!-- Проверяем пользователя на аутентификацию, если да, то отражаем кнопку ВЫХОД и ИМЯ
+                             если нет, отражаем кнопки РЕГИСТРАЦИЯ и ВХОД-->
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item active">
+                                <form action="{% url 'account_logout' %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="nav-link btn btn-link">Выход</button>
+                                </form>
+                            </li>
+                            <li class="nav-item" style="color: red;">
+                                Вы авторизованы как: {{ request.user.username }}</li>
+                        {% else %}
+                            <li class="nav-item active"><a class="nav-link" href="{% url 'account_signup' %}">Регистрация</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="{% url 'account_login' %}">Вход</a></li>
+                        {% endif %}
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'post_search' %}">Поиск</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'post' %}">Все публикации</a></li>
                     </ul>
                 </div>
             </div>
