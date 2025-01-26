@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from .forms import SignUpForm
+from new_portal.models import Author
 
 
 class SignUp(CreateView):
@@ -27,8 +28,10 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 @login_required
 def upgrade_me(request):
-    user = request.user
-    author_group = Group.objects.get(name='authors')
-    if not request.user.groups.filter(name='authors').exists():
-        author_group.user_set.add(user)
+    user = request.user                                          # Получаем текущего авторизованного пользователя
+    author_group = Group.objects.get(name='authors')             # Получаем имя необходимой группы
+    if not request.user.groups.filter(name='authors').exists():  # Проверяем, что пользователь не связан с этой группой
+        author_group.user_set.add(user)                          # и если его нет, то добавляем в группу authors
+    if not Author.objects.filter(user=user).exists():      # Если авторизованный пользователь не связан с моделью Author
+        Author.objects.create(user=user)                         # то делаем его экземпляром класса Author
     return redirect('/')

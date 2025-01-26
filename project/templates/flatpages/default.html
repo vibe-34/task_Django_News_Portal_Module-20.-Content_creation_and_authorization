@@ -33,7 +33,7 @@
                                     <button type="submit" class="nav-link btn btn-link">Выход</button>
                                 </form>
                             </li>
-                            <li class="nav-item" style="color: red;">
+                            <li class="nav-link" style="color: red">
                                 Вы авторизованы как: {{ request.user.username }}</li>
                         {% else %}
                             <li class="nav-item active"><a class="nav-link" href="{% url 'account_signup' %}">Регистрация</a></li>
