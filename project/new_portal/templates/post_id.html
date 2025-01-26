@@ -26,5 +26,14 @@
                 <td>{{ post_id.content|censor}}</td>
             </tr>
         </table>
-    {% endif %}
+<!--Проверяем право доступа для каждой ссылки отдельно-->
+{% if perms.new_portal.change_post %}
+    <a href="{% url 'post_update' post_id.id %}">Редактировать</a>
+{% endif %}
+
+{% if perms.new_portal.delete_post %}
+    <a href="{% url 'post_delete' post_id.id %}">Удалить</a>
+{% endif %}
+
+{% endif %}
 {% endblock content %}
